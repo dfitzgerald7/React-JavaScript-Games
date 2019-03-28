@@ -6,6 +6,7 @@ class App extends Component {
   render() {
     return (
       <h1> Hello World </h1>
+      <h2>Welcome to The JavaScript Mini-Games</h2>
     );
   }
 }
