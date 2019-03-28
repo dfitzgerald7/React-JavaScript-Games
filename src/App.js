@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {Route} from 'react-router-dom'
+import HomePage from "./Components/HomePage"
+import SnakeContainer from "./Components/SnakeContainer"
+import BrickbreakerContainer from "./Components/BrickbreakerContainer.js"
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <h1> Hello World </h1>
-      <h2>Welcome to The JavaScript Mini-Games</h2>
+      <>
+      <Route exact path="/" component={HomePage}/>   
+      <Route path="/games/snake" component={SnakeContainer} />
+      <Route path="/games/brickbreaker" component={BrickbreakerContainer} />
+      </>
     );
   }
 }
