@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom'
 import HomePage from "./Components/HomePage"
-import SnakeContainer from "./Components/SnakeContainer"
+import SnakeContainer from "./Components/Snake/SnakeContainer"
 import BrickbreakerContainer from "./Components/BrickbreakerContainer.js"
 import './App.css';
 
