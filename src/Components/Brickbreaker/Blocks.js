@@ -15,7 +15,7 @@ const Blocks = props => {
     return ( 
         <svg>
             {renderedBlocks.map(block => {
-                const myKey = block.verticalIndex + block.horizontalIndex
+                const myKey = block.verticalIndex.toString() + block.horizontalIndex
                 const myX = props.boardWidth/8 * block.horizontalIndex + props.offSetX
                 const myY = props.boardHeight/10 * block.verticalIndex + props.offSetY
                 return (<rect key={myKey}
@@ -24,7 +24,7 @@ const Blocks = props => {
                     stroke="black" fill="red"/>)
                 }
                 )
-                }
+            }
         </svg>
     )
 }

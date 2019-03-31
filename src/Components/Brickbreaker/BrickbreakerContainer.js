@@ -4,17 +4,19 @@ import BrickbreakerBoard from './BrickbreakerBoard'
 //height and width must have close multiples for the grid system to work
 //8 across, 10 down. blockWidth should be the multiple
 const myConstants={ 
-    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:5, blockWidth: 50
+    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:10, blockWidth: 50
 }
 
 class BrickbreakerContainer extends Component {
 
     constructor() {
         super()
+        document.addEventListener("click", this.handleClick)
         const blockArray = this.createNewBlockArray()
+        const {boardWidth, boardHeight, offSetX, offSetY, ballRadius} = myConstants
         this.state = {
             blockArray,
-            ballPosition: {ballX: myConstants.boardWidth/2, ballY: myConstants.boardHeight + myConstants.ballRadius} 
+            ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY} 
         }
     }
 
@@ -28,12 +30,16 @@ class BrickbreakerContainer extends Component {
 
     newBlocks = () => { //create 2d array to track blocks
         const {blockArray} = this.state
-        blockArray.unshift(blockArray[0].map(block => Math.random() > .5 ? 1 : 0))
+        blockArray.unshift(blockArray[0].map(block => (Math.random() > .4) ? 1 : 0))
         blockArray.pop()
         this.setState({
             ...this.state, blockArray
         })
       }
+
+    handleClick = event => {
+        this.newBlocks()
+    }  
 
     componentDidMount(){
         this.newBlocks()
