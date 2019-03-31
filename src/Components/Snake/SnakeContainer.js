@@ -29,15 +29,25 @@ class SnakeContainer extends Component {
                 {x: (myConstants.width - 80)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY}
                 
             ],
-            dx: 10, dy: 0, foodX: 0, foodY: 0, 
-            addTail: false, didCreateFood: false }
+            dx: 10, dy: 0, foodX: 0, foodY: 0, score: 0,
+            addTail: false, didCreateFood: false, runInterval: true }
 
     }
 
 
 
     resetState = () => {
-        this.setState()
+        this.setState({
+          snake:[
+              {x: (myConstants.width)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY},
+              {x: (myConstants.width - 20)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY},
+              {x: (myConstants.width - 40)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY},
+              {x: (myConstants.width - 60)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY},
+              {x: (myConstants.width - 80)/2 + myConstants.offSetX, y: myConstants.height/2 + myConstants.offSetY}
+              
+          ],
+          dx: 10, dy: 0, foodX: 0, foodY: 0, score: 0,
+          addTail: false, didCreateFood: false, runInterval: true })
     }
 
     handleKeyPress = event => {
@@ -92,41 +102,43 @@ class SnakeContainer extends Component {
 
     didEatFood = () => {
         const {snake, foodX, foodY} = this.state
-        if (snake[0].x === foodX && snake[0].y === foodY){
-            this.setState({
-                ...this.state, addTail: true, didCreateFood: false
-            })
-        }
+        return (snake[0].x === foodX && snake[0].y === foodY)
     }
     
-    moveSnake = gameInterval => {
-        console.log(this.state.snake)
+    moveSnake = () => {
         const {snake, dx, dy} = this.state
         const {x, y} = this.state.snake[0]
         snake.unshift({x: x + dx, y: y - dy}) //add new move to head
-        if (!this.state.addTail) {snake.pop()} 
         if (this.gameOver(snake)){
-            console.log("over")
-            clearInterval(gameInterval)
-        } else {
-        this.setState({
-            ...this.state, snake, addTail: false
-        })
+          this.setState({...this.state, runInterval: false})
+          return
         } 
+        if (this.didEatFood()) {
+          this.setState({
+            ...this.state, snake, addTail: true, didCreateFood: false, score: this.state.score + 1
+          })
+        }
+        else {
+          snake.pop()
+          this.setState({
+              ...this.state, snake, addTail: false
+          })
+         } 
       }
 
     componentDidMount() {
-        const gameInterval = setInterval(() => {
-            console.log(this.state.foodX, this.state.foodY)
-                this.createFood()
-                this.didEatFood()
-                this.moveSnake(gameInterval)
-            }
-        , 100)}
+      this.createFood()
+        setInterval(() => {
+            if (this.state.runInterval){
+            this.createFood()
+            this.moveSnake()}}
+        , 100)
+      }
 
     render() {
         return (
         <>
+        <h2> score: {this.state.score} </h2>
         <SnakeBoard 
             width={myConstants.width} 
             height={myConstants.height}
@@ -136,7 +148,8 @@ class SnakeContainer extends Component {
             snake={this.state.snake}
             foodX={this.state.foodX}
             foodY={this.state.foodY}/>
-        </>
+        <button onClick={this.resetState} > Replay </button>
+            </>
             )}
 
 
