@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route} from 'react-router-dom'
 import HomePage from "./Components/HomePage"
 import SnakeContainer from "./Components/Snake/SnakeContainer"
-import BrickbreakerContainer from "./Components/BrickbreakerContainer.js"
+import BrickbreakerContainer from "./Components/Brickbreaker/BrickbreakerContainer.js"
 import './App.css';
 
 class App extends Component {
