@@ -1,7 +1,6 @@
 import React from 'react'; 
 
 const Ball = props => {
-    console.log("ball", props)
     const {ballX, ballY} = props.ballPosition
     return ( 
         <svg>

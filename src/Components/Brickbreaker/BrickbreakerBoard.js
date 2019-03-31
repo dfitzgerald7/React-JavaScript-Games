@@ -15,6 +15,8 @@ const BrickbreakerBoard = props => {
             offSetX={props.offSetX}
             offSetY={props.offSetY}/>
             <Ball ballPosition={props.ballPosition} ballRadius={props.ballRadius}/>
+            <line x1={props.width/2 + props.offSetX} y1={props.height - props.ballRadius + props.offSetY}
+                x2={props.lineCoordinates.lineX} y2={props.lineCoordinates.lineY} stroke="black"  />
         </svg>
         </>
         )
