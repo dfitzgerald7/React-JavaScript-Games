@@ -4,7 +4,7 @@ import BrickbreakerBoard from './BrickbreakerBoard'
 //height and width must have close multiples for the grid system to work
 //8 across, 10 down. blockWidth should be the multiple
 const myConstants={ 
-    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:10, blockWidth: 50
+    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:8, blockWidth: 50
 }
 
 class BrickbreakerContainer extends Component {
@@ -18,7 +18,7 @@ class BrickbreakerContainer extends Component {
         this.state = {
             blockArray,
             ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY},
-            dx: 10, dy: 0, lineCoordinates: {lineX: boardWidth/2, lineY: boardHeight}
+            dx: 0, dy: 0, lineCoordinates: {lineX: boardWidth/2 + offSetX, lineY: boardHeight + offSetY}, canMakeMouseMove: true
         }
     }
 
@@ -45,33 +45,37 @@ class BrickbreakerContainer extends Component {
             ...this.state, blockArray
         })
       }
-
+    // gives the direction for the ball then disables being able to click mouse
     handleClick = event => {
+      if (this.state.canMakeMouseMove){
         const {clientX, clientY} = event
         const {unitX, unitY} = this.buildUnitVector(myConstants.boardWidth/2 + myConstants.offSetX, myConstants.boardHeight + myConstants.offSetY, clientX, clientY)
         this.setState({
-            ...this.state, dx: unitX, dy: unitY
+            ...this.state, dx: unitX, dy: unitY, canMakeMouseMove: false, lineCoordinates: {lineX: myConstants.boardWidth/2 + myConstants.offSetX, lineY: myConstants.boardHeight + myConstants.offSetY}
         })
         // this.newBlocks()
-        const levelInterval = setInterval(() => this.moveBall(levelInterval), 3)
+        const levelInterval = setInterval(() => this.moveBall(levelInterval), 1)
+      }
     }  
 
     handleMouseMove = event => {
+      if (this.state.canMakeMouseMove){
         const {clientX, clientY} = event
         this.setState({
             ...this.state, lineCoordinates: {lineX: clientX, lineY: clientY}
         })
+      }
     }
 
     //handles the movement of one "unit" of movement
-    moveBall = () => {
+    moveBall = levelInterval => {
         const {boardWidth, boardHeight, offSetX, offSetY, ballRadius} = myConstants
         let {ballX, ballY} = this.state.ballPosition
         let {dx, dy, blockArray} = this.state
-        // if (ballY > boardHeight - ballRadius){ //only way to end a level
-        //   console.log("over")
-        //   return
-        // }
+        if (ballY > boardHeight + offSetY - ballRadius){ //only way to end a level
+          this.nextLevel(levelInterval)
+          return
+        }
         if (ballX < offSetX + ballRadius || ballX > offSetX + boardWidth - ballRadius) { dx = -dx } //collision logic
         if (ballY < offSetY + ballRadius || ballY > offSetY + boardHeight - ballRadius) { dy = -dy }
         for (let i = 0; i<8; i++){ // yikes on this nested for loop. need to rework
@@ -97,11 +101,25 @@ class BrickbreakerContainer extends Component {
               }
             }
           }
+          
           ballX += dx; ballY += dy
           this.setState({
               ...this.state, blockArray, dx, dy, ballPosition: {ballX, ballY}
           })
         }
+
+    //resets the state except for the block array. gets new line of blocks
+    //should have an animation aspect that could be async?
+    nextLevel = levelInterval => {
+      const {boardWidth, boardHeight, offSetX, offSetY, ballRadius} = myConstants
+      clearInterval(levelInterval)
+      this.newBlocks() 
+      this.setState({
+        ...this.state,
+        ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY},
+        dx: 0, dy: 0, lineCoordinates: {lineX: boardWidth/2, lineY: boardHeight}, canMakeMouseMove: true
+      })
+    }
 
     componentDidMount(){
         this.newBlocks()
