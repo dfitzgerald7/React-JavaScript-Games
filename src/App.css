@@ -23,6 +23,27 @@
   color: #61dafb;
 }
 
+.Board-Container {
+  position: relative;
+  float: left
+}
+
+.Score {
+  left: 0;
+  position:absolute;
+  text-align:center;
+  top: 30px;
+  width: 115%
+}
+
+.GameOver {
+  left: 0;
+  position:absolute;
+  text-align:center;
+  top: 600px;
+  width: 115%
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

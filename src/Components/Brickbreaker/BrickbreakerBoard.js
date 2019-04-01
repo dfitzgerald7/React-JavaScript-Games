@@ -5,7 +5,7 @@ import Ball from "./Ball"
 const BrickbreakerBoard = props => {
         return (
         <>
-        <svg width="700" height="700">
+        <svg width={props.width + props.offSetX} height={props.height + props.offSetY}>
             <rect x={props.offSetX} y={props.offSetY} width={props.width} height={props.height}
             style={{fill: 'white', stroke: 'black'}} /> );
             <Blocks blockArray={props.blockArray} 
