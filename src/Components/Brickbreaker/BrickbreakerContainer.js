@@ -5,7 +5,7 @@ import BrickbreakerGameOver from './BrickbreakerGameOver'
 //height and width must have close multiples for the grid system to work
 //8 across, 10 down. blockWidth should be the multiple
 const myConstants={ 
-    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:8, blockWidth: 50
+    boardWidth: 400, boardHeight: 500, offSetX: 50, offSetY: 100, ballRadius:5, blockWidth: 50
 }
 
 class BrickbreakerContainer extends Component {
@@ -20,20 +20,20 @@ class BrickbreakerContainer extends Component {
             blockArray,
             ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY},
             dx: 0, dy: 0, lineCoordinates: {lineX: boardWidth/2 + offSetX, lineY: boardHeight + offSetY}, 
-            canMakeMouseMove: true, score: 0, displayBool: false
+            canMakeMouseMove: true, score: 0, displayBool: false, numOfBalls: 5
         }
     }
-
+    //refreshes the state
+    //setState has a callback because we want to make the new blocks once the state 
+    //has been cleared.
     refreshGame = () => {
-      console.log("refresh")
       const {boardWidth, boardHeight, offSetX, offSetY, ballRadius} = myConstants
       this.setState({
         blockArray: this.createNewBlockArray(),
         ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY},
         dx: 0, dy: 0, lineCoordinates: {lineX: boardWidth/2 + offSetX, lineY: boardHeight + offSetY}, 
         canMakeMouseMove: true, score: 0, displayBool: false
-      })
-      this.newBlocks()
+      }, this.newBlocks)
     }
 
     //used to have mouse clicks in all directions have a constant velocity
@@ -160,7 +160,6 @@ class BrickbreakerContainer extends Component {
         this.newBlocks()
     }
 
-
     render() { 
         return (
         <div className={"Board-Container"} >
@@ -172,9 +171,12 @@ class BrickbreakerContainer extends Component {
           offSetX={myConstants.offSetX}
           offSetY={myConstants.offSetY}
           ballRadius={myConstants.ballRadius}
+          numOfBalls={this.state.numOfBalls}
           blockArray={this.state.blockArray}
           ballPosition={this.state.ballPosition}
           lineCoordinates={this.state.lineCoordinates}
+          dx={this.state.dx}
+          dy={this.state.dy}
           />
           <div className={"GameOver"}>
             < BrickbreakerGameOver displayBool={this.state.displayBool} handleClick={this.refreshGame}/>
