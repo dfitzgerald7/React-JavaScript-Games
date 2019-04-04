@@ -5,7 +5,7 @@ const Ball = props => {
     const ballArray = []
     for (let i = 0; i < props.numOfBalls; i++){
         ballArray.push(
-            <circle cx={ballX + (props.dx * 15 * i) } cy={ballY + (props.dy * 15 * i)} r={props.ballRadius} stroke="black" strokeWidth="3" fill="red" />
+            <circle cx={ballX} cy={ballY + (props.dy * 15 * i)} r={props.ballRadius} stroke="black" strokeWidth="3" fill="red" />
         )
     }
 

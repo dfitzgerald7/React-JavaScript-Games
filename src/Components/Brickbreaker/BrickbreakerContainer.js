@@ -20,7 +20,7 @@ class BrickbreakerContainer extends Component {
             blockArray,
             ballPosition: {ballX: boardWidth/2 + offSetX, ballY: boardHeight - ballRadius + offSetY},
             dx: 0, dy: 0, lineCoordinates: {lineX: boardWidth/2 + offSetX, lineY: boardHeight + offSetY}, 
-            canMakeMouseMove: true, score: 0, displayBool: false, numOfBalls: 5
+            canMakeMouseMove: true, score: 0, displayBool: false, numOfBalls: 1
         }
     }
     //refreshes the state
@@ -116,6 +116,7 @@ class BrickbreakerContainer extends Component {
                 } else {
                   dy = -dy
                 }
+                break 
               }
               }
             }
@@ -158,6 +159,10 @@ class BrickbreakerContainer extends Component {
 
     componentDidMount(){
         this.newBlocks()
+    }
+
+    componentWillUnmount() {
+      this.refreshGame()
     }
 
     render() { 
