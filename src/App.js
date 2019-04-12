@@ -4,6 +4,7 @@ import HomePage from "./Components/HomePage"
 import SnakeContainer from "./Components/Snake/SnakeContainer"
 import BrickbreakerContainer from "./Components/Brickbreaker/BrickbreakerContainer.js"
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 class App extends Component {
   render() {

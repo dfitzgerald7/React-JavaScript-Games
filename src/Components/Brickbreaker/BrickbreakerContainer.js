@@ -168,7 +168,7 @@ class BrickbreakerContainer extends Component {
     render() { 
         return (
         <div className={"Board-Container"} >
-          <h2 className={"Score"}> Score: {this.state.score} </h2>
+          <h4 className={"Score"}> Score: {this.state.score} </h4>
           <BrickbreakerBoard 
           width={myConstants.boardWidth} 
           height={myConstants.boardHeight}

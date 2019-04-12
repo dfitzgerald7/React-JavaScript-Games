@@ -55,10 +55,10 @@ class SnakeContainer extends Component {
         const {dx, dy} = this.state 
         let newDx, newDy
         const dir = event.key
-        const goingDown = dy === -10
-        const goingUp = dy === 10
-        const goingRight = dx === 10
-        const goingLeft = dx === -10
+        const goingDown = dy === -20
+        const goingUp = dy === 20
+        const goingRight = dx === 20
+        const goingLeft = dx === -20
         if (dir === "ArrowUp" && !goingDown){
           newDx = 0; newDy = 10
         }
