@@ -7,7 +7,8 @@ class HomePage extends Component {
         return (
             <>
             <Row className={'center-align'}>
-                <h2 className={'center-align'}>Welcome to The JavaScript Mini-Games</h2>
+                <h2 className={'center-align'}>Welcome to JavaScript Mini-Games</h2>
+                <h4> Click a game below. </h4>
              </Row>
             <Row className={'center-align'}>
                 <Col l={4}>
