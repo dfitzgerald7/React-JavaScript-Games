@@ -11,7 +11,7 @@ class Twenty48Container extends Component {
         super()
         document.addEventListener('keydown', this.handleKeyPress)
         this.state = {
-            blocks: [{x: 100, y:100}, {x:200, y:200}]
+            blocks: [{x: 100, y:100, num:2}, {x:200, y:200, num:2}]
         }
     }
 
@@ -22,9 +22,13 @@ class Twenty48Container extends Component {
             let blocks = this.state.blocks
             blocks.map(block => {
                 if (block[dir] + delta >= 0 && block[dir] + delta < myConst.width){
-                    block[dir] += delta
-                }  
+                    console.log('true')
+                    return block[dir] += delta
+                } else {
+                    return null
+                }
             })
+            // const filteredBlocks = blocks.filter(item => item)
             this.setState(blocks)
         }
     }
