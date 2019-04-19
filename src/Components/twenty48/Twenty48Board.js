@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
 const Twenty48Board = props => {
-    return ( 
-        <svg> 
+    return (
+        <h2> 2048 coming soon!</h2> 
+        // <svg> 
 
-            <rect width="300" 
-                height="100" 
-                style={{fill:'blue'}} />
+        //     <rect width="300" 
+        //         height="100" 
+        //         style={{fill:'blue'}} />
 
-        </svg>
+        // </svg>
      );
 }
  
