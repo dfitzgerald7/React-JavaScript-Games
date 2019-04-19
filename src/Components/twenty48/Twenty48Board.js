@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-
+import Twenty48Blocks from './Twenty48Blocks.js'
 const Twenty48Board = props => {
-    return (
-        <h2> 2048 coming soon!</h2> 
-        // <svg> 
+    return ( 
+        <svg width='1000' height='1000'> 
 
-        //     <rect width="300" 
-        //         height="100" 
-        //         style={{fill:'blue'}} />
-
-        // </svg>
+            <rect x={props.offSetX} y={props.offSetY} 
+                width={props.width}
+                height={props.width}
+                style={{fill:'white', stroke:'black'}} />
+            <Twenty48Blocks offSetX={props.offSetX} offSetY={props.offSetY}
+                width={props.width}/>
+        </svg>
      );
 }
  

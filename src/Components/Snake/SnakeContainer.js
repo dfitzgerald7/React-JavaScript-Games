@@ -51,6 +51,7 @@ class SnakeContainer extends Component {
     }
 
     handleKeyPress = event => {
+        event.preventDefault() //prevent scrolling
         //Check which direction currently moving to prevent direction reversal
         const {dx, dy} = this.state 
         let newDx, newDy
