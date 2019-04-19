@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Twenty48Blocks from './Twenty48Blocks.js'
 const Twenty48Board = props => {
     return ( 
@@ -9,7 +9,7 @@ const Twenty48Board = props => {
                 height={props.width}
                 style={{fill:'white', stroke:'black'}} />
             <Twenty48Blocks offSetX={props.offSetX} offSetY={props.offSetY}
-                width={props.width}/>
+                width={props.width} blocks={props.blocks}/>
         </svg>
      );
 }

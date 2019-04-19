@@ -10,11 +10,42 @@ class Twenty48Container extends Component {
     constructor() {
         super()
         document.addEventListener('keydown', this.handleKeyPress)
+        this.state = {
+            blocks: [{x: 100, y:100}, {x:200, y:200}]
+        }
     }
 
     handleKeyPress = event => {
-        event.preventDefault()
-        console.log(event)
+        if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key)){
+            event.preventDefault()
+            const {dir, delta} = this.newBlockCoords(event.key)
+            let blocks = this.state.blocks
+            blocks.map(block => {
+                if (block[dir] + delta >= 0 && block[dir] + delta < myConst.width){
+                    block[dir] += delta
+                }  
+            })
+            this.setState(blocks)
+        }
+    }
+
+    
+    newBlockCoords = direction => {
+        switch (direction){
+            case 'ArrowRight':
+                return {dir: 'x' ,delta: 100}
+            case 'ArrowLeft':
+                return {dir: 'x', delta: -100}
+            case 'ArrowUp':
+                return {dir: 'y', delta: -100}
+            case 'ArrowDown':
+                return {dir: 'y', delta: 100}
+            default:
+        }
+    }
+
+    componentDidMount() {
+        //create initial blocks
     }
 
     render() { 
@@ -23,6 +54,7 @@ class Twenty48Container extends Component {
                 offSetX={myConst.offSetX} 
                 offSetY={myConst.offSetY}
                 width={myConst.width}
+                blocks={this.state.blocks}
                 /> );
     }
 }
