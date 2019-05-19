@@ -15,6 +15,9 @@ class App extends Component {
       <Route path="/games/snake" component={SnakeContainer} />
       <Route path="/games/brickbreaker" component={BrickbreakerContainer} />
       <Route path="/games/2048" component={Twenty48Container} />
+      <div id='footer'>
+        Copyright Doug Fitzgerald
+      </div>
       </>
     );
   }
