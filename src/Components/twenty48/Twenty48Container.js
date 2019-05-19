@@ -20,16 +20,25 @@ class Twenty48Container extends Component {
             event.preventDefault()
             const {dir, delta} = this.newBlockCoords(event.key)
             let blocks = this.state.blocks
-            blocks.map(block => {
-                if (block[dir] + delta >= 0 && block[dir] + delta < myConst.width){
+            // blocks.map(block => {
+            //     console.log((block[dir] + delta >= 0) && (block[dir] + delta < myConst.width))
+            //     if ((block[dir] + delta >= 0) && (block[dir] + delta < myConst.width)){
+            //         console.log('true')
+            //         return block[dir] += delta
+            //     } else {
+            //         return null
+            //     }
+            // })
+
+            const newBlocks = blocks.reduce((newBlocks, block) => {
+                if ((block[dir] + delta >= 0) && (block[dir] + delta < myConst.width)){
                     console.log('true')
-                    return block[dir] += delta
-                } else {
-                    return null
+                    newBlocks.push(block[dir] += delta)
                 }
-            })
+                return newBlocks
+            }, [])
             // const filteredBlocks = blocks.filter(item => item)
-            this.setState(blocks)
+            this.setState(newBlocks)
         }
     }
 
