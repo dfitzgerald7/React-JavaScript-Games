@@ -11,10 +11,12 @@ class App extends Component {
   render() {
     return (
       <>
-      <Route exact path="/" component={HomePage}/>   
+      <Route exact path="/" component={HomePage}/>  
+      <div id='buttons'> 
       <Route path="/games/snake" component={SnakeContainer} />
       <Route path="/games/brickbreaker" component={BrickbreakerContainer} />
       <Route path="/games/2048" component={Twenty48Container} />
+      </div>
       <div id='footer'>
         Copyright Doug Fitzgerald
       </div>

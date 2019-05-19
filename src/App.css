@@ -44,6 +44,18 @@
   width: 115%
 }
 
+#buttons {
+  padding: 200px;
+}
+
+#footer {
+  clear: both;
+  padding: 10px;
+  background-color: grey;
+  color: white;
+  text-align: right;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
